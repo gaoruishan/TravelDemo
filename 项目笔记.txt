@@ -1,0 +1,20 @@
+
+1.对项目目录和配置使用说明
+https://blog.csdn.net/u011684839/article/details/80221844
+
+2,①根目录index.html 是唯一入口页面, webpack构建的文件js或CSS自动加入
+  ②src目录main.js是唯一入口函数,其中<div id="app"></div> ,使用new Vue创建唯一Vue对象并填充到指定id="app"中
+  ③src下的router目录index.js是唯一的路由配置, 对应main.js中引入路由和app.vue核心组件
+
+
+3,①stylus中文网:https://stylus.bootcss.com/
+  ②手动生成css: stylus --compress < test.styl > test.css
+  ③在线css转less/sass/stylus工具 css编辑器: http://tools.jb51.net/code/css2less
+  ④Stylus基本使用: https://www.jianshu.com/p/5fb15984f22d
+
+4,WebStorm（2018版）-----eslint的配置和使用: https://blog.csdn.net/qq_29329037/article/details/80100450
+
+5,轮播图地址:https://github.com/surmon-china/vue-awesome-swiper
+  安装2.6.7版本:npm install vue-awesome-swiper@2.6.7 --save
+
+6,使用 Mint UI库: http://mint-ui.github.io/docs/#/zh-cn2

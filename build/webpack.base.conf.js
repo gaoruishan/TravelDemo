@@ -47,6 +47,8 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      // 自定义别名
+      '@styles':resolve('src/assets/styles')
     }
   },
   // 使用插件配置相应文件的处理方法

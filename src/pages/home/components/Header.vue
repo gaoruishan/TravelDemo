@@ -7,7 +7,7 @@
       <span class="iconfont">&#xe632;</span>
       输入城市/景点/游玩主题
     </div>
-    <div class="header-right">城市
+    <div class="header-right">{{city}}
       <span class="iconfont">&#xe6aa;</span>
     </div>
   </div>
@@ -15,7 +15,10 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  props: {
+    city: String
+  }
 }
 </script>
 <!--scoped只对当前组件有效-->
@@ -41,7 +44,7 @@ export default {
       flex 1
       height 0.6rem
       line-height 0.6rem
-      padding  0 0.15rem
+      padding 0 0.15rem
       background-color white
       border-radius 0.12rem
       color #ccc

@@ -12,8 +12,15 @@ module.exports = {
     assetsSubDirectory: 'static',
     // 根目录
     assetsPublicPath: '/',
-    // 可利用该属性解决跨域的问题
-    proxyTable: {},
+    // 可利用该属性解决跨域的问题 将http://localhost:8080/api/index.json 改为静态可访问的http://localhost:8080/static/index.json
+    proxyTable: {
+      '/api':{
+        target:'http://localhost:8080',
+        pathRewrite:{
+          '^/api':'/static'
+        }
+      }
+    },
 
     // 各种Dev Server设置
     host: 'localhost', // 可以被process.env.host覆盖

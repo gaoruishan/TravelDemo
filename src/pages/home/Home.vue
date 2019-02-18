@@ -1,14 +1,11 @@
 <template>
   <div>
+    <!--模板中使用小写,对应的HomeHeader-->
     <home-header :city="city"></home-header>
     <home-swiper :swiperList="swiperList"></home-swiper>
     <home-icons :iconList="iconList"></home-icons>
     <home-recommend :recommendList="recommendList"></home-recommend>
     <week-recommend :weekendList="weekendList"></week-recommend>
-    <!--<div>home</div>-->
-    <!--路由跳转 不用a标签-->
-    <!--<router-link to="/list">列表页</router-link>-->
-    <!--模板中使用小写,对应的HomeHeader-->
   </div>
 
 </template>

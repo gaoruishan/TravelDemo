@@ -1,3 +1,4 @@
+/*根据需求改路径:src: url('./iconfont/iconfont.eot */
 @font-face {font-family: "iconfont";
   src: url('./iconfont/iconfont.eot?t=1548764242492'); /* IE9 */
   src: url('./iconfont/iconfont.eot?t=1548764242492#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -6,7 +7,7 @@
   url('./iconfont/iconfont.ttf?t=1548764242492') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
   url('./iconfont/iconfont.svg?t=1548764242492#iconfont') format('svg'); /* iOS 4.1- */
 }
-
+/*默认使用<span class='iconfont' />*/
 .iconfont {
   font-family: "iconfont" !important;
   font-size: 16px;
@@ -14,4 +15,5 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 

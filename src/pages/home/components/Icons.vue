@@ -1,6 +1,6 @@
 <template>
   <!--autoPlay设置自动播放时间,0表示不自动播放,continuous设置是否循环播放-->
-  <mt-swipe class="icons" :auto="autoPlay" :continuous="false">
+  <mt-swipe v-if="showIcons" class="icons" :auto="autoPlay" :continuous="false">
     <mt-swipe-item v-for="(page,i) of countPages" :key="i">
       <div class="icon-page">
         <div class="icons-img" v-for="item of page" :key="item.id">
@@ -27,7 +27,6 @@ export default {
   computed: {
     countPages () {
       const pages = []
-      console.log(this.iconList)
       this.iconList.forEach((item, i) => {
         // 每8个一组
         const index = Math.floor(i / 8)
@@ -38,8 +37,10 @@ export default {
         pages[index].push(item)
       })
       return pages
+    },
+    showIcons () {
+      return this.iconList.length
     }
-
   }
 }
 </script>

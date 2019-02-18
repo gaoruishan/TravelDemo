@@ -1,6 +1,6 @@
 <template>
   <div class="home-swiper">
-    <mt-swipe :auto="autoPlay">
+    <mt-swipe :auto="autoPlay" v-if="showSwipe" >
       <mt-swipe-item v-for="item of swiperList" :key="item.id">
         <img :src="item.imgUrl"/>
       </mt-swipe-item>
@@ -17,6 +17,11 @@ export default {
   data () {
     return {
       autoPlay: 3000
+    }
+  },
+  computed: {
+    showSwipe () {
+      return this.swiperList.length
     }
   }
 }

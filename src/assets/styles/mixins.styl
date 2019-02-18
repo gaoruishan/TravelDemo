@@ -1,4 +1,27 @@
+@import "varibles.styl"
+//文本单行显示
 ellipse()
   overflow hidden
   white-space nowrap
   text-overflow ellipsis
+
+//icon图标边距
+iconMargin()
+  margin $baseMargin
+  color white
+
+//水平方向
+horizontal()
+  display flex
+  flex-direction row
+
+//水平方向居中
+horizontalCenter()
+  horizontal()
+  justify-content center
+
+//垂直方向居中
+verticalCenter()
+  display flex
+  flex-direction column
+  justify-content center

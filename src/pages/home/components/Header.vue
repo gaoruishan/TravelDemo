@@ -7,9 +7,13 @@
       <span class="iconfont">&#xe632;</span>
       输入城市/景点/游玩主题
     </div>
-    <div class="header-right">{{city}}
-      <span class="iconfont">&#xe6aa;</span>
-    </div>
+    <!--跳转城市选择界面-->
+    <router-link to="/city">
+      <div class="header-right">{{city}}
+        <span class="iconfont">&#xe6aa;</span>
+      </div>
+    </router-link>
+
   </div>
 </template>
 
@@ -33,24 +37,25 @@ export default {
     flex-direction row
     justify-content center
     align-items center
-    height 0.86rem
+    height $titleHeight
     background-color $bgColor
     color white
     .header-left {
-      margin 0.15rem
+      margin $baseMargin
     }
     //height和line-height 组合使用 垂直居中
     .header-input {
       flex 1
       height 0.6rem
       line-height 0.6rem
-      padding 0 0.15rem
+      padding 0 $baseMargin
       background-color white
       border-radius 0.12rem
-      color #ccc
+      color $darkColor
     }
     .header-right {
-      margin 0.15rem
+      margin $baseMargin
+      color white
     }
   }
 

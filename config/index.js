@@ -15,6 +15,7 @@ module.exports = {
     // 可利用该属性解决跨域的问题 将http://localhost:8080/api/index.json 改为静态可访问的http://localhost:8080/static/index.json
     proxyTable: {
       '/api':{
+        // 正式接口调试改变URL
         target:'http://localhost:8080',
         pathRewrite:{
           '^/api':'/static'
@@ -64,7 +65,7 @@ module.exports = {
     // js,css,images存放文件夹名
     assetsSubDirectory: 'static',
     // 发布的根目录，通常本地打包dist后打开文件会报错，此处修改为./。如果是上线的文件，可根据文件存放位置进行更改路径
-    assetsPublicPath: '/',
+    assetsPublicPath: '/travel',
 
     /**
      * Source Maps

@@ -40,3 +40,41 @@ https://blog.csdn.net/u011684839/article/details/80221844
      overflow hidden
      white-space nowrap
      text-overflow ellipsis
+
+10, 在package.json中配置 --host 0.0.0.0   可在局域网ip通手机连接测试
+
+11, 打包npm run build命令 会执行build/build.js 生成一个dist目录
+    设置assetsPublicPath: '/travel' 文件存放服务器位置路径
+
+12,rem和em区别
+  em:是长度单位,参照当前元素的字号font-size大小; 没有设置,参照浏览器默认设置
+  rem:是css3中的长度单位,参照根元素(html)的字号
+
+13,UI设计图以iPhone6的750px的2倍图,实际上375pt点--> 1rem 对应在rest.css的html中font-size=50px
+   例如: 在@1x基准图中 43px --> 1rem==>50px,  43/50=0.86rem 即在@2x图中 对应86px
+
+14,在webpack.base.confi.js中配置,在vue中使用 @import "~@styles/varibles.styl"
+    // 自动的扩展后缀，比如一个js文件，则引用时书写可不要写.js
+    extensions: ['.js', '.vue', '.json'],
+    // 创建路径的别名，比如增加'components': resolve('src/components')等
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src'),
+      // 自定义别名
+      '@styles':resolve('src/assets/styles')
+     }
+区别: /* 别名导入 */
+     @import "~@styles/varibles.styl"
+     /* 相对路径导入 */
+     @import "../../../assets/styles/varibles.styl"
+
+15,// 调用push返回指定路径
+   this.$router.push('/')
+
+16,flex 属性值可以包含三个参数：flex-grow，flex-shrink 和 flex-basis。
+   第二个和第三个参数（flex-shrink 和 flex-basis）可选。
+    (1)flex-grow属性: 定义项目的放大比例
+    如果所有项目的flex-grow属性都为1，则它们将等分剩余空间
+    如果一个项目的flex-grow属性为2，其他项目都为1
+    (2)flex-shrink属性:定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小
+    (3)flex-basis属性:定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。

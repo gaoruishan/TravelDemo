@@ -1,7 +1,8 @@
 <template>
   <div class="recommend-container border-bottom">
     <span>热销推荐</span>
-    <div class="rem-item border-bottom" v-for="item of recommendList" :key="item.id">
+    <router-link tag="div" :to="'/detail/'+item.id" class="rem-item border-bottom"
+                 v-for="item of recommendList" :key="item.id">
       <img :src="item.imgUrl"/>
       <div class="rem-item-right">
         <p class="title">{{item.title}}</p>
@@ -10,7 +11,7 @@
           <p>¥69</p>起
         </div>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -21,8 +22,7 @@ export default {
     recommendList: Array
   },
   data () {
-    return {
-    }
+    return {}
   }
 }
 </script>

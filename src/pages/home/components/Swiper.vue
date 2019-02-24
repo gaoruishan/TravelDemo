@@ -28,9 +28,11 @@ export default {
 </script>
 <!--保持图片宽高比显示-->
 <style lang="stylus" scoped>
+  @import "~@styles/varibles.styl"
   .home-swiper {
     width: 100%
     height 2.1rem
+    margin-top $titleHeight
     .swiper-img {
       width: 100%
     }

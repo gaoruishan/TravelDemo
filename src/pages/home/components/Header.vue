@@ -20,8 +20,14 @@
 <script>
 export default {
   name: 'Header',
-  props: {
-    city: String
+  data () {
+    return {
+      city: this.$store.state.city
+    }
+  },
+  mounted () {
+    // 直接调用 不能加doubleCity()
+    console.log(this.$store.getters.doubleCity)
   }
 }
 </script>
@@ -33,6 +39,10 @@ export default {
 <style lang="stylus" scoped>
   @import "~@styles/varibles.styl"
   .header {
+    position fixed
+    top 0
+    z-index 99
+    width 100%
     display flex
     flex-direction row
     justify-content center

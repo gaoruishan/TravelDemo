@@ -6,19 +6,24 @@
         <div class="currentCity">
           <div class="cityTab">当前城市</div>
           <div class="cityBox">
-            <div class="cityName">北京</div>
+            <div class="cityName">{{this.$store.state.city}}</div>
           </div>
         </div>
         <div class="hotCity">
           <div class="cityTab">热门城市</div>
           <div class="cityBox">
-            <div class="cityName" v-for="item of hotCities" :key="item.id">{{item.name}}</div>
+            <div class="cityName" @click="selectCity(item.name)" v-for="item of hotCities"
+                 :key="item.id">
+              {{item.name}}
+            </div>
           </div>
         </div>
-        <div class="listCity" v-for="(arr,key) of cities" :key="key">
+        <div class="listCity" v-show="!keyword" v-for="(arr,key) of cities" :key="key">
           <div class="cityTab" :ref="key">{{key}}</div>
           <div class="alphabetList">
-            <div class="alphabetCity border-bottom" v-for="item of arr" :key="item.id">
+            <div class="alphabetCity border-bottom" @click="selectCity(item.name)"
+                 v-for="item of arr"
+                 :key="item.id">
               {{item.name}}
             </div>
           </div>
@@ -40,25 +45,33 @@ export default {
   name: 'List',
   props: {
     hotCities: Array,
-    cities: Object
+    cities: Object,
+    keyword: String
   },
   methods: {
     handleClick (e) {
       let alp = e.target.innerText
       var element = this.$refs[alp][0]
       this.scroll.scrollToElement(element)
+    },
+    selectCity (city) {
+      this.$store.commit('changeCity', city)
+      this.$router.push('/')
     }
   },
   mounted () {
-    this.scroll = new BetterScroll(this.$refs.wrapper)
+    this.$nextTick(() => {
+      this.scroll = new BetterScroll(this.$refs.wrapper)
+      console.log(this.$refs.wrapper)
+    })
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-  @import "../../../assets/styles/varibles.styl"
+  @import "~@styles/varibles.styl"
   .block {
-    height $titleHeight * 2 - .1rem
+    height $titleHeight * 2
   }
 
   .alphabet {

@@ -70,6 +70,9 @@ https://blog.csdn.net/u011684839/article/details/80221844
 
 15,// 调用push返回指定路径
    this.$router.push('/')
+   // 将router-link默认的a标签给为div, 用单引号拼接参数
+   <router-link tag="div" :to="'/detail/'+item.id" />
+   对应的router中添加: path: '/detail/:id',
 
 16,flex 属性值可以包含三个参数：flex-grow，flex-shrink 和 flex-basis。
    第二个和第三个参数（flex-shrink 和 flex-basis）可选。
@@ -78,3 +81,14 @@ https://blog.csdn.net/u011684839/article/details/80221844
     如果一个项目的flex-grow属性为2，其他项目都为1
     (2)flex-shrink属性:定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小
     (3)flex-basis属性:定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。
+
+17,在css里面，padding-top,padding-bottom,margin-top,margin-bottom取值为百分比的时候，参照的是父元素的宽度。
+   比如：父元素宽度是100px, 子元素padding-top:50%，那么padding-top的实际值就是100*50%=50px
+
+18,iconfont网站:https://www.iconfont.cn/
+   使用:   <span class="iconfont">&#xe624;</span>
+
+19,<!--判断是否有数据,调用自己<datail-list />递归-->
+   <div v-if="item.children" class="item-children">
+      <datail-list :categoryList="item.children"></datail-list>
+   </div>

@@ -1,8 +1,9 @@
 <template>
   <div class="layout">
     <city-header></city-header>
-    <city-search></city-search>
-    <city-list :hotCities="hotCities" :cities="cities">
+    <city-search @searchKeyWord="getSearchKeyWord" :cities="cities"></city-search>
+    <city-list :keyword="keyword" :hotCities="hotCities"
+               :cities="cities">
     </city-list>
   </div>
 </template>
@@ -18,7 +19,8 @@ export default {
   data () {
     return {
       hotCities: [],
-      cities: {}
+      cities: {},
+      keyword: ''
     }
   },
   components: {
@@ -37,6 +39,10 @@ export default {
             this.cities = data.cities
           }
         })
+    },
+    getSearchKeyWord (keyword) {
+      console.log(keyword)
+      this.keyword = keyword
     }
   },
   created () {

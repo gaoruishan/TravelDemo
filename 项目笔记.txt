@@ -21,9 +21,12 @@ https://blog.csdn.net/u011684839/article/details/80221844
 
 7, !important 语法,提升指定样式条目的应用优先权
 
-8,computed定义方法,模板中可以直接使用'变量'-->每8个分一组
-    const pages = []
-      this.pageItemList.forEach((item, i) => {
+8,对比computed和watch
+// computed定义方法,模板中可以直接使用'变量',不加() -->每8个分一组
+  computed: {
+    countPages () {
+      const pages = []
+      this.iconList.forEach((item, i) => {
         // 每8个一组
         const index = Math.floor(i / 8)
         // 是否包含下标
@@ -33,8 +36,21 @@ https://blog.csdn.net/u011684839/article/details/80221844
         pages[index].push(item)
       })
       return pages
+    },
+    showIcons () {
+      return this.iconList.length
     }
-
+  }
+// watch是对data中的keyword监听变化,模板中可以直接使用'变量'
+watch: {
+  keyword () {
+    // 传个父类
+    this.$emit('searchKeyWord', this.keyword)
+    if (!this.keyword) {
+      return
+    }
+  }
+}
 9,定义一个mixins.styl混入样式,在组件中导入@import "~@styles/mixins.styl",直接调用 ellipse()
   ellipse()
      overflow hidden

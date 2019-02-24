@@ -32,10 +32,16 @@ export default {
   },
   data () {
     return {
+      lastCity: '',
       iconList: [],
       recommendList: [],
       swiperList: [],
       weekendList: []
+    }
+  },
+  computed: {
+    city () {
+      return this.$store.state.city
     }
   },
   methods: {
@@ -53,8 +59,16 @@ export default {
         })
     }
   },
-  created () {
+  mounted () {
+    this.lastCity = this.city
+    console.log(this.city)
     this.getHomeInfos()
+  },
+  activated () {
+    console.log(this.city)
+    if (this.lastCity !== this.city) {
+      this.getHomeInfos()
+    }
   }
 }
 </script>

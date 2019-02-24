@@ -21,8 +21,11 @@
 export default {
   name: 'Header',
   data () {
-    return {
-      city: this.$store.state.city
+    return {}
+  },
+  computed: {
+    city () {
+      return this.$store.state.city
     }
   },
   mounted () {

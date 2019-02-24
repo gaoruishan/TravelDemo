@@ -35,6 +35,7 @@ export default {
       this.$router.push('/')
     }
   },
+  // watch是对data中的keyword监听变化
   watch: {
     keyword () {
       // 传个父类

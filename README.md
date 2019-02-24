@@ -140,3 +140,118 @@ npm run build --report
  }
 
 ```
+
+##常用知识点
+```
+
+1.对项目目录和配置使用说明
+https://blog.csdn.net/u011684839/article/details/80221844
+
+2,①根目录index.html 是唯一入口页面, webpack构建的文件js或CSS自动加入
+  ②src目录main.js是唯一入口函数,其中<div id="app"></div> ,使用new Vue创建唯一Vue对象并填充到指定id="app"中
+  ③src下的router目录index.js是唯一的路由配置, 对应main.js中引入路由和app.vue核心组件
+
+
+3,①stylus中文网:https://stylus.bootcss.com/
+  ②手动生成css: stylus --compress < test.styl > test.css
+  ③在线css转less/sass/stylus工具 css编辑器: http://tools.jb51.net/code/css2less
+  ④Stylus基本使用: https://www.jianshu.com/p/5fb15984f22d
+
+4,WebStorm（2018版）-----eslint的配置和使用: https://blog.csdn.net/qq_29329037/article/details/80100450
+
+5,轮播图地址:https://github.com/surmon-china/vue-awesome-swiper
+  安装2.6.7版本:npm install vue-awesome-swiper@2.6.7 --save
+
+6,使用 Mint UI库: http://mint-ui.github.io/docs/#/zh-cn2
+
+7, !important 语法,提升指定样式条目的应用优先权
+
+8,对比computed和watch
+// computed定义方法,模板中可以直接使用'变量',不加() -->每8个分一组
+  computed: {
+    countPages () {
+      const pages = []
+      this.iconList.forEach((item, i) => {
+        // 每8个一组
+        const index = Math.floor(i / 8)
+        // 是否包含下标
+        if (!pages[index]) {
+          pages[index] = []
+        }
+        pages[index].push(item)
+      })
+      return pages
+    },
+    showIcons () {
+      return this.iconList.length
+    }
+  }
+// watch是对data中的keyword监听变化,模板中可以直接使用'变量'
+watch: {
+  keyword () {
+    // 传个父类
+    this.$emit('searchKeyWord', this.keyword)
+    if (!this.keyword) {
+      return
+    }
+  }
+}
+9,定义一个mixins.styl混入样式,在组件中导入@import "~@styles/mixins.styl",直接调用 ellipse()
+  ellipse()
+     overflow hidden
+     white-space nowrap
+     text-overflow ellipsis
+
+10, 在package.json中配置 --host 0.0.0.0   可在局域网ip通手机连接测试
+
+11, 打包npm run build命令 会执行build/build.js 生成一个dist目录
+    设置assetsPublicPath: '/travel' 文件存放服务器位置路径
+
+12,rem和em区别
+  em:是长度单位,参照当前元素的字号font-size大小; 没有设置,参照浏览器默认设置
+  rem:是css3中的长度单位,参照根元素(html)的字号
+
+13,UI设计图以iPhone6的750px的2倍图,实际上375pt点--> 1rem 对应在rest.css的html中font-size=50px
+   例如: 在@1x基准图中 43px --> 1rem==>50px,  43/50=0.86rem 即在@2x图中 对应86px
+
+14,在webpack.base.confi.js中配置,在vue中使用 @import "~@styles/varibles.styl"
+    // 自动的扩展后缀，比如一个js文件，则引用时书写可不要写.js
+    extensions: ['.js', '.vue', '.json'],
+    // 创建路径的别名，比如增加'components': resolve('src/components')等
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src'),
+      // 自定义别名
+      '@styles':resolve('src/assets/styles')
+     }
+区别: /* 别名导入 */
+     @import "~@styles/varibles.styl"
+     /* 相对路径导入 */
+     @import "../../../assets/styles/varibles.styl"
+
+15,// 调用push返回指定路径
+   this.$router.push('/')
+   // 将router-link默认的a标签给为div, 用单引号拼接参数
+   <router-link tag="div" :to="'/detail/'+item.id" />
+   对应的router中添加: path: '/detail/:id',
+
+16,flex 属性值可以包含三个参数：flex-grow，flex-shrink 和 flex-basis。
+   第二个和第三个参数（flex-shrink 和 flex-basis）可选。
+    (1)flex-grow属性: 定义项目的放大比例
+    如果所有项目的flex-grow属性都为1，则它们将等分剩余空间
+    如果一个项目的flex-grow属性为2，其他项目都为1
+    (2)flex-shrink属性:定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小
+    (3)flex-basis属性:定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。
+
+17,在css里面，padding-top,padding-bottom,margin-top,margin-bottom取值为百分比的时候，参照的是父元素的宽度。
+   比如：父元素宽度是100px, 子元素padding-top:50%，那么padding-top的实际值就是100*50%=50px
+
+18,iconfont网站:https://www.iconfont.cn/
+   使用:   <span class="iconfont">&#xe624;</span>
+
+19,<!--判断是否有数据,调用自己<datail-list />递归-->
+   <div v-if="item.children" class="item-children">
+      <datail-list :categoryList="item.children"></datail-list>
+   </div>
+
+```

@@ -27,6 +27,10 @@ const createLintingRule = () => ({
 module.exports = {
   // path.join将路径片段进行拼接，而path.resolve将以/开始的路径片段作为根目录，在此之前的路径将会被丢弃
   context: path.resolve(__dirname, '../'),
+  // 配置入口，默认为单页面所以只有app一个入口
+  entry: {
+    app: './src/main.js'
+  },
   // 配置出口，默认是/dist作为目标文件夹的路径,又是config配置
   output: {
     path: config.build.assetsRoot,

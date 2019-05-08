@@ -14,11 +14,13 @@ module.exports = {
     assetsPublicPath: '/',
     // 可利用该属性解决跨域的问题 将http://localhost:8080/api/index.json 改为静态可访问的http://localhost:8080/static/index.json
     proxyTable: {
-      '/api':{
-        // 正式接口调试改变URL
-        target:'http://localhost:8080',
-        pathRewrite:{
-          '^/api':'/static'
+      //api是服务自己定义的
+      '/api': {
+        // 正式接口调试改变URL 一般是http://www.yilihuo.com/这种的
+        target: 'http://localhost:8080',
+        // 这个pathRewrite是path路径,Rewrite复写覆盖,改为/static目录了
+        pathRewrite: {
+          '^/api': '/static'
         }
       }
     },
@@ -58,20 +60,22 @@ module.exports = {
   // 生产环境下面的配置
   build: {
     // index编译后生成的位置和名字，根据需要改变后缀，比如index.php
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../travel/index.html'),
 
-    // 编译后存放生成环境代码的位置
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    // 编译后存放生成环境代码的位置 这里默认是dist,我改Travel了
+    assetsRoot: path.resolve(__dirname, '../travel'),
     // js,css,images存放文件夹名
     assetsSubDirectory: 'static',
-    // 发布的根目录，通常本地打包dist后打开文件会报错，此处修改为./。如果是上线的文件，可根据文件存放位置进行更改路径
-    assetsPublicPath: '/travel',
+    // 1,APP发布的根目录，通常本地打包dist后打开文件会报错，此处修改为./。
+    // 2,Web发布的根目录,如果是上线的文件，可根据文件存放位置进行更改路径 /travel
+    assetsPublicPath: './',
 
     /**
-     * Source Maps
+     * .map文件的作用：
+     * 项目打包后，代码都是经过压缩加密的，如果运行时报错，输出的错误信息无法准确得知是哪里的代码报错。有了map就可以像未加密的代码一样，准确的输出是哪一行哪一列有错。
+     * 默认是打开的,会生成一个.map文件,我嫌占大小改为false了
      */
-
-    productionSourceMap: true,
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

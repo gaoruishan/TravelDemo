@@ -23,15 +23,11 @@ const createLintingRule = () => ({
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
 })
-
+// module.exports模块的导出{}一个对象里面有一堆配置Key:Value
 module.exports = {
   // path.join将路径片段进行拼接，而path.resolve将以/开始的路径片段作为根目录，在此之前的路径将会被丢弃
   context: path.resolve(__dirname, '../'),
-  // 配置入口，默认为单页面所以只有app一个入口
-  entry: {
-    app: './src/main.js'
-  },
-  // 配置出口，默认是/dist作为目标文件夹的路径
+  // 配置出口，默认是/dist作为目标文件夹的路径,又是config配置
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
@@ -41,11 +37,12 @@ module.exports = {
   },
   // 解析默认扩展名及别设置
   resolve: {
-    // 自动的扩展后缀，比如一个js文件，则引用时书写可不要写.js
+    // 自动的扩展后缀，比如一个js文件，则引用时书写可不要写.js,这个控制不用加后缀,只有这个三个其他的格式必须加后缀
     extensions: ['.js', '.vue', '.json'],
     // 创建路径的别名，比如增加'components': resolve('src/components')等
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
+      // 这个比较常用一般以@开头的标识指向src目录
       '@': resolve('src'),
       // 自定义别名
       '@styles':resolve('src/assets/styles')

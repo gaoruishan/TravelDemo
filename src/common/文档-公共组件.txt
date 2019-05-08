@@ -1,0 +1,17 @@
+
+使用说明:
+1,FadeAnimation.vue 是渐变显示组件
+  导入: import FadeAnimation from '../../../common/anim/FadeAnimation'
+  <fade-animation>
+      <div>xxxxx</div>
+  </fade-animation>
+
+2,Gallary.vue 封装一预览轮播组件
+  导入: import Gallary from '../../../common/gallary/Gallary'
+  gallaryImgs: 图片地址数组;
+  close: 关闭监听
+  <fade-animation>
+      <gallary :gallaryImgs="datas.gallaryImgs" @close="gallaryClose"
+               v-show="showGallary">
+      </gallary>
+  </fade-animation>

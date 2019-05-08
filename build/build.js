@@ -15,13 +15,16 @@ const chalk = require('chalk')
 const webpack = require('webpack')
 // 默认读取下面的index.js文件
 const config = require('../config')
+// 这个webpack.prod.conf是具体代码
 const webpackConfig = require('./webpack.prod.conf')
 // 调用start的方法实现加载动画，优化用户体验
 const spinner = ora('building for production...')
 spinner.start()
 // 先删除dist文件再生成新文件，因为有时候会使用hash来命名，删除整个文件可避免冗余
+// config是配置文件,一般开发只用这个,比如配置assetsRoot和assetsSubDirectory
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
+  // 这是核心webpack方法
   webpack(webpackConfig, (err, stats) => {
     spinner.stop()
     if (err) throw err
@@ -33,12 +36,13 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
       chunks: false,
       chunkModules: false
     }) + '\n\n')
-
+    // 错误输出 没啥用
     if (stats.hasErrors()) {
       console.log(chalk.red('  Build failed with errors.\n'))
+      // 停止
       process.exit(1)
     }
-
+    // 没啥用
     console.log(chalk.cyan('  Build complete.\n'))
     console.log(chalk.yellow(
       '  Tip: built files are meant to be served over an HTTP server.\n' +

@@ -1,11 +1,12 @@
 @import "varibles.styl"
+//定义全局公共的样式,相当于方法 引入后直接调用
 //文本单行显示
 ellipse()
   overflow hidden
   white-space nowrap
   text-overflow ellipsis
 
-//icon图标边距
+//icon图标边距,$baseMargin这个是@import "varibles.styl"中定义的直接'$'调用
 iconMargin()
   margin $baseMargin
   color white

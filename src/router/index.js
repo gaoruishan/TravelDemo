@@ -1,6 +1,7 @@
 import Vue from 'vue'
 //  导入 vue-router 包
 import Router from 'vue-router'
+// 这个地方使用了@符号,就相当于./不能少好像是'./src/pages/home/Home'
 import Home from '@/pages/home/Home'
 import City from '@/pages/city/City'
 import Detail from '@/pages/detail/Detail'
@@ -21,6 +22,7 @@ export default new Router({
       component: City
     },
     {
+      // 这里的:id用于传值得
       path: '/detail/:id',
       name: 'Detail',
       component: Detail

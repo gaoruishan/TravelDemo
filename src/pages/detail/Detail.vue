@@ -15,6 +15,8 @@ import DetailBanner from './components/Banner'
 import DetailHeader from './components/Header'
 import DetailList from './components/List'
 import axios from 'axios'
+// 导入测试数据
+import localData from '../../../static/detail'
 
 export default {
   name: 'Detail',
@@ -30,18 +32,25 @@ export default {
     }
   },
   methods: {
+    handleData (res) {
+      const data = res.data
+      this.bannerData = data
+      this.categoryList = data.categoryList
+    },
     getDetailInfo () {
+      if (this.$store.state.test) {
+        console.log('%s%o', '测试:', localData)
+        this.handleData(localData)
+        return
+      }
       axios.get('/api/detail.json', {
         params: {
           id: this.$route.params.id
         }
       })
         .then((res) => {
-          if (res.status === 200 && res.data.data) {
-            const data = res.data.data
-            this.bannerData = data
-            this.categoryList = data.categoryList
-          }
+          console.log(res)
+          this.handleData(res.data)
         })
     }
   },

@@ -6,6 +6,7 @@ const config = require('../config')
 // 通过webpack-merge实现webpack.dev.conf.js对wepack.base.config.js的继承
 const merge = require('webpack-merge')
 const path = require('path')
+// 又引入webpack.base.conf基础配置
 const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')

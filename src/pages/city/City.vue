@@ -13,6 +13,8 @@ import CityHeader from './components/Header'
 import CitySearch from './components/Search'
 import CityList from './components/List'
 import axios from 'axios'
+// 导入测试数据
+import localData from '../../../static/city'
 
 export default {
   name: 'City',
@@ -29,15 +31,21 @@ export default {
     CityList
   },
   methods: {
+    handleData (res) {
+      const data = res.data
+      this.hotCities = data.hotCities
+      this.cities = data.cities
+    },
     getCity () {
+      if (this.$store.state.test) {
+        console.log('%s%o', '测试:', localData)
+        this.handleData(localData)
+        return
+      }
       axios.get('/api/city.json')
         .then((res) => {
           console.log(res)
-          if (res.status === 200 && res.data) {
-            const data = res.data.data
-            this.hotCities = data.hotCities
-            this.cities = data.cities
-          }
+          this.handleData(res.data)
         })
     },
     getSearchKeyWord (keyword) {

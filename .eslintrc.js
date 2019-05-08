@@ -14,6 +14,11 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint'
   },
+  globals: {
+    '$': false,
+    'jquery': false,
+    'BMap': true,
+  },
   // 你的 javascript 脚步将要运行在什么环境（如：nodejs，browser，commonjs等）中
   env: {
     browser: true,

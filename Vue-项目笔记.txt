@@ -1,0 +1,289 @@
+
+创建项目:vue init webpack 项目名
+
+常用库
+1,css库
+Hover.css是一套使用CSS3动画实现的Hover特效集锦
+http://ianlunn.github.io/Hover/
+一款CSS3的动画效果小类库。包含了60多款不同类型的CSS3动画，包括：晃动，闪动，各种淡出淡出效果
+https://daneden.github.io/animate.css/
+
+
+1.对项目目录和配置使用说明
+https://blog.csdn.net/u011684839/article/details/80221844
+
+2,①根目录index.html 是唯一入口页面, webpack构建的文件js或CSS自动加入
+  ②src目录main.js是唯一入口函数,其中<div id="app"></div> ,使用new Vue创建唯一Vue对象并填充到指定id="app"中
+  ③src下的router目录index.js是唯一的路由配置, 对应main.js中引入路由和app.vue核心组件
+
+
+3,①stylus中文网:https://stylus.bootcss.com/
+  ②手动生成css: stylus --compress < test.styl > test.css
+  ③在线css转less/sass/stylus工具 css编辑器: http://tools.jb51.net/code/css2less
+  ④Stylus基本使用: https://www.jianshu.com/p/5fb15984f22d
+
+4,WebStorm（2018版）-----eslint的配置和使用: https://blog.csdn.net/qq_29329037/article/details/80100450
+
+5,轮播图地址:https://github.com/surmon-china/vue-awesome-swiper
+  安装2.6.7版本:npm install vue-awesome-swiper@2.6.7 --save
+
+6,使用 Mint UI库: http://mint-ui.github.io/docs/#/zh-cn2
+
+7, !important 语法,提升指定样式条目的应用优先权
+
+8,对比computed和watch
+// computed定义方法,模板中可以直接使用'变量',不加() -->每8个分一组
+  computed: {
+    countPages () {
+      const pages = []
+      this.iconList.forEach((item, i) => {
+        // 每8个一组
+        const index = Math.floor(i / 8)
+        // 是否包含下标
+        if (!pages[index]) {
+          pages[index] = []
+        }
+        pages[index].push(item)
+      })
+      return pages
+    },
+    showIcons () {
+      return this.iconList.length
+    }
+  }
+// watch是对data中的keyword监听变化,模板中可以直接使用'变量'
+watch: {
+  keyword () {
+    // 传个父类
+    this.$emit('searchKeyWord', this.keyword)
+    if (!this.keyword) {
+      return
+    }
+  }
+}
+9,定义一个mixins.styl混入样式,在组件中导入@import "~@styles/mixins.styl",直接调用 ellipse()
+  ellipse()
+     overflow hidden
+     white-space nowrap
+     text-overflow ellipsis
+
+10, 在package.json中配置 --host 0.0.0.0   可在局域网ip通手机连接测试
+  "scripts": {
+    "dev": "webpack-dev-server --host 0.0.0.0  --inline --progress --config build/webpack.dev.conf.js",
+    "start": "npm run dev",
+    "lint": "eslint --ext .js,.vue src",
+    // 这里找build.js
+    "build": "node build/build.js"
+  },
+
+11, 打包npm run build命令 会执行build/build.js 生成一个dist目录
+    设置assetsPublicPath: '/travel' 文件存放服务器位置路径
+
+12,(1)rem和em区别
+  em:是长度单位,参照当前元素的字号font-size大小; 没有设置,参照浏览器默认设置
+  rem:是css3中的长度单位,参照根元素(html)的字号
+  如果你把html的font-size设为20px，rem就是html的字体大小，那么1rem = 20px。
+  (2)px(pixel==CSS逻辑像素):相对长度单位,像素px是相对于显示器屏幕分辨率而言的,是一个固定的尺寸,不管在多大屏幕上都显示一样大小;
+  (3)rpx（responsive pixel）: 可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。
+   如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px逻辑像素 = 750物理像素，1rpx = 0.5px = 1物理像素。
+   设备	rpx换算px (屏幕宽度/750)	px换算rpx (750/屏幕宽度)
+   iPhone5	1rpx = 0.42px	1px = 2.34rpx
+   iPhone6	1rpx = 0.5px	1px = 2rpx
+  (4)关于rem和px全局设置问题: https://blog.csdn.net/qq_34573142/article/details/81184636
+
+13,UI设计图以iPhone6的750px物理像素的图,实际上375px逻辑像素点
+   ==> 1rem 对应在rest.css的html中font-size=50px逻辑像素===100px物理像素
+   例如: @2x图中 对应86px物理像素 即86/100=0.86rem
+   总结:UI设计图以iPhone6的750px图
+   1)在微信小程序中,图上1px 则css中使用1rpx
+   2)在移动app中,将html设置font-size=50px,图上1px 则css中使用0.01rem
+
+   微信小程序-->转webapp
+   1)Html部分:
+        标签将<view>改为<div>; <image>改为<img>; <text>改为<span>; <block>改为<div>
+        wx:if="{{!searching}}" 改为v-if="!searching"去掉{}
+        <img src=""> 的src路径改一下
+        事件bindtap='onSearch'改为 @click='onSearch'
+        子组件 <book-cmp /> 改为BookCmp.vue
+        循环语句<block wx:for="{{bookList}}" wx:key="{{id}}">
+        改为<div v-for="item in bookList" :key="item.id">
+   2)Css部分:
+        复制css,单位1rpx 改为 1*0.01rem
+   3)js部分:
+
+
+14,在webpack.base.confi.js中配置,在vue中使用 @import "~@styles/varibles.styl"
+    // 自动的扩展后缀，比如一个js文件，则引用时书写可不要写.js
+    extensions: ['.js', '.vue', '.json'],
+    // 创建路径的别名，比如增加'components': resolve('src/components')等
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src'),
+      // 自定义别名
+      '@styles':resolve('src/assets/styles')
+     }
+区别: /* 别名导入 */
+     @import "~@styles/varibles.styl"
+     /* 相对路径导入 */
+     @import "../../../assets/styles/varibles.styl"
+
+15,// 调用push返回指定路径
+   this.$router.push('/')
+   // 将router-link默认的a标签给为div, 用单引号拼接参数
+   <router-link tag="div" :to="'/detail/'+item.id" />
+   对应的router中添加: path: '/detail/:id',
+
+16,flex 属性值可以包含三个参数：flex-grow，flex-shrink 和 flex-basis。
+   第二个和第三个参数（flex-shrink 和 flex-basis）可选。
+    (1)flex-grow属性: 定义项目的放大比例
+    如果所有项目的flex-grow属性都为1，则它们将等分剩余空间
+    如果一个项目的flex-grow属性为2，其他项目都为1
+    (2)flex-shrink属性:定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小
+    (3)flex-basis属性:定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。
+
+17,在css里面，padding-top,padding-bottom,margin-top,margin-bottom取值为百分比的时候，参照的是父元素的宽度。
+   比如：父元素宽度是100px, 子元素padding-top:50%，那么padding-top的实际值就是100*50%=50px
+
+18,iconfont网站:https://www.iconfont.cn/
+   使用:   <span class="iconfont">&#xe624;</span>
+
+19,<!--判断是否有数据,调用自己<datail-list />递归-->
+   <div v-if="item.children" class="item-children">
+      <datail-list :categoryList="item.children"></datail-list>
+   </div>
+
+20,Vue打包后JS文件夹中出现一些map文件的解决方法: https://www.jianshu.com/p/558fe6873964
+    // 打包是否生成 .map文件
+    productionSourceMap: true,
+
+21,默认使用flex布局。因为flex布局有利于跨更多平台，尤其是采用原生渲染的平台。如不了解flex布局，请参考
+   http://www.runoob.com/w3cnote/flex-grammar.html
+
+22,Vue webapp项目通过HBulider打包原生APP（vue+webpack+HBulider）
+   https://blog.csdn.net/wang1006008051/article/details/78065226
+
+23,[新API]检测网络状态
+      // 1. 当网络连接到时候  弹出 p 显示网络连接 然后消失
+   	   window.addEventListener('online', function() {
+              console.log("网络已经连接")
+   	   })
+    		// 2. 当网络断开到时候  弹出 p 显示网络已断开 然后消失
+    		window.addEventListener('offline', function() {
+               console.log("奥利个奥，网络断开了")
+   	   })
+24,[新API]全屏操作
+	// 1 单击全屏显示
+	document.querySelector("#full").onclick = function() {
+		// div.webkitRequestFullScreen(); 开启全屏
+		// 能力检测  做一个兼容性的解决方法
+		 if(div.requestFullScreen) {  // 正常浏览器
+		 	div.requestFullScreen();
+		 } else if (div.webkitRequestFullScreen) {  // webkit 内核
+		 	div.webkitRequestFullScreen();
+		 } else if (div.mozRequestFullScreen) {  // moz
+		 	div.mozRequestFullScreen();
+		 } else if (div.msRequestFullscreen) {  // ms 微软  这里面有个坑 别掉进去了
+		 	div.msRequestFullscreen(); //  ms 里面这样写msRequestFullscreen()     s是小写的
+		 } else {   // 欧朋
+		 	div.oRequestFullScreen();
+		 }
+	}
+
+	// 2 取消全屏  跟元素没有关系  跟 document
+	document.querySelector("#cancelFull").onclick = function() {
+		 document.webkitCancelFullScreen();  // document 退出全屏
+	}
+	// 3 是否全屏显示
+	 document.querySelector("#isFull").onclick = function() {
+		 alert(document.webkitIsFullScreen); // webkit是否存在 全屏状态
+	}
+
+25,使用百度地图
+(1)  <!--引入百度地图-->
+     <script type="text/javascript"
+             src="http://api.map.baidu.com/api?v=3.0&ak=Mfzm782DpGGKIRq2PH2LyPiSuxC3z9rD">
+     </script>
+
+(2) 布局 <div class="map" ref="bmap"></div>
+(3) // 创建Map实例
+     let map = new BMap.Map(this.$refs.bmap);
+     // 初始化地图,设置中心点坐标和地图级别
+     map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+     // 添加地图类型控件
+     map.addControl(new BMap.MapTypeControl({
+       mapTypes: [
+         BMAP_NORMAL_MAP,
+         BMAP_HYBRID_MAP
+       ]
+     }));
+     // 设置地图显示的城市 此项是必须设置的
+     map.setCurrentCity("北京");
+     // 开启鼠标滚轮缩放
+     map.enableScrollWheelZoom(true);
+     // 点击事件
+     map.addEventListener("click", function () {
+         console.log("您点击了地图")
+       }
+     );
+     // 拖动事件
+     map.addEventListener("dragend", function () {
+         let center = map.getCenter();
+         console.log('%s%o', 'log:', "地图中心点变更为：" + center.lng + ", " + center.lat)
+     }
+     );
+     // 浏览器定位
+     let geolocation = new BMap.Geolocation();
+     // 开启SDK辅助定位
+     geolocation.enableSDKLocation();
+     geolocation.getCurrentPosition(function (r) {
+       if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+         let mk = new BMap.Marker(r.point);
+         map.addOverlay(mk);
+         map.panTo(r.point);
+         console.log('%s%o', 'log:', '您的位置：' + r.point.lng + ',' + r.point.lat);
+       } else {
+         let myCity = new BMap.LocalCity();
+         myCity.get((result) => {
+           let cityName = result.name;
+           map.setCenter(cityName);
+           console.log('%s%o', 'log:', "当前定位城市:" + cityName);
+         });
+       }
+     });
+
+26,使用MUI库
+  1)css样式(主要bg的base64单双引号问题)
+    // 导入 MUI 的样式
+    import './assets/mui/css/mui.min.css'
+    // 导入扩展图标样式
+    import './assets/mui/css/icons-extra.css'
+  2)js库
+    // 导入mui.js
+    import mui from './assets/mui/js/mui.min'
+    // 在组件中倒是可以通过this.$mui的方式调用
+    Vue.prototype.$mui = mui;
+
+27,真机返回键
+      // 真机返回键,点击不退出程序
+      plus.key.addEventListener("backbutton", () => {
+        console.log("点击返回");
+      });
+28,对props变量修改,例如LikeCmp.vue
+    props: {
+      like: Boolean,
+      count: Number
+    },
+    data() {
+      return {
+        likeData: false,
+        countData: 0
+      }
+    },
+    watch: {
+      like(val) {
+        this.likeData = val
+      },
+      count(val) {
+        this.countData = val
+      },
+    },

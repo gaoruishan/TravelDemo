@@ -6,7 +6,9 @@
         <div class="currentCity">
           <div class="cityTab">当前城市</div>
           <div class="cityBox">
-            <div class="cityName">{{this.$store.state.city}}</div>
+            <div class="cityName">
+              <span> {{this.$store.state.city}}</span>
+            </div>
           </div>
         </div>
         <div class="hotCity">
@@ -14,7 +16,7 @@
           <div class="cityBox">
             <div class="cityName" @click="selectCity(item.name)" v-for="item of hotCities"
                  :key="item.id">
-              {{item.name}}
+              <span>{{item.name}}</span>
             </div>
           </div>
         </div>
@@ -55,7 +57,9 @@ export default {
       this.scroll.scrollToElement(element)
     },
     selectCity (city) {
+      // 提交,调用方法
       this.$store.commit('changeCity', city)
+      // 手动push切换路由
       this.$router.push('/')
     }
   },
@@ -69,6 +73,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  //<!--导入变量-->
   @import "~@styles/varibles.styl"
   .block {
     height $titleHeight * 2
@@ -87,9 +92,9 @@ export default {
   }
 
   .list {
+    width 100%
     overflow: hidden
     position: absolute
-    width 100%
     .cityTab {
       width 100%
       background-color $darkColor
@@ -99,6 +104,7 @@ export default {
       display flex
       flex-direction row
       flex-wrap wrap
+      width 100%
       .cityName {
         width 26%
         margin $baseMargin
